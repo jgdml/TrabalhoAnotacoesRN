@@ -1,28 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Anotacao from './lib/model/anotacao';
+import React from "react";
+import InitDb from "./lib/db/sqlite/initDb";
 
-export default function App() {
+import Anotacoes from "./lib/view/anotacoes";
 
-  var a = new Anotacao(1, "teste", "teste", "testes")
+export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+        new InitDb();
+    }
 
-  console.warn(a);
-
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-
-      <StatusBar style="auto" />
-    </View>
-  );
+    render() {
+        return <Anotacoes />;
+    }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
