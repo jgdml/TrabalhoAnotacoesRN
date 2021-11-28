@@ -1,15 +1,40 @@
 import React from "react";
-import InitDb from "./lib/db/sqlite/initDb";
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Anotacoes from "./lib/view/anotacoes";
+import InitDb from "./lib/db/sqlite/initDb";
 
-export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-        new InitDb();
-    }
+const Stack = createNativeStackNavigator();
 
-    render() {
-        return <Anotacoes />;
-    }
+const customTheme = {
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primary: "#4760c9",
+        text: "white"
+    },
+};
+
+function App() {
+    new InitDb();
+
+    return (
+        <NavigationContainer theme={customTheme}>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name="home"
+                    component={Anotacoes}
+                    options={{
+                        title: "Anotações",
+                        headerStyle: {
+                            backgroundColor: "#4760c9"
+                        },
+                    }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
+
+export default App;
