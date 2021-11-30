@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Anotacoes from "./lib/view/anotacoes";
 import InitDb from "./lib/db/sqlite/initDb";
+import CriarAnotacao from "./lib/view/criar_anotacao";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,7 +13,7 @@ const customTheme = {
     colors: {
         ...DefaultTheme.colors,
         primary: "#4760c9",
-        text: "white"
+        text: "white",
     },
 };
 
@@ -28,7 +29,17 @@ function App() {
                     options={{
                         title: "Anotações",
                         headerStyle: {
-                            backgroundColor: "#4760c9"
+                            backgroundColor: "#4760c9",
+                        },
+                    }}
+                />
+                <Stack.Screen
+                    name="create"
+                    component={CriarAnotacao}
+                    options={{
+                        title: "Criar Anotação",
+                        headerStyle: {
+                            backgroundColor: "#4760c9",
                         },
                     }}
                 />
