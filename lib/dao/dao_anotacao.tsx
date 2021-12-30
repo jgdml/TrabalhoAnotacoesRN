@@ -49,11 +49,16 @@ export default class DaoAnotacao{
 
     public saveOrUpdate(anotacao: Anotacao){
         return new Promise((resolve, reject) => {
+            var vals = Object.values(anotacao)
+            console.log(vals)
+            vals = vals.slice(0, 3)
+            console.log(vals)
+
             if (anotacao.getId() == null){
                 this.db.transaction(
                     tx => tx.executeSql(
-                        "INSERT INTO ANOTACAO (ID, TITULO, TEXTO, DT_MODIFICACAO) VALUES (?, ?, ?, ?)", 
-                        Object.values(anotacao),
+                        "INSERT INTO ANOTACAO (ID, TITULO, TEXTO) VALUES (?, ?, ?)", 
+                        vals,
     
                         (_, {insertId}) => resolve(insertId),
                         (_, err) => reject(err)
@@ -62,12 +67,12 @@ export default class DaoAnotacao{
                 )
             }
             else{
-                var vals = Object.values(anotacao)
-                vals.splice(3, 0, vals.splice(0, 1)[0])
-
+                // trocar posicao do id para ultimo por conta do select
+                vals.splice(2, 0, vals.splice(0, 1)[0])
+                
                 this.db.transaction(
                     tx => tx.executeSql(
-                        "UPDATE ANOTACAO SET TITULO = ?, TEXTO = ?, DT_MODIFICACAO = ? WHERE ID = ?",
+                        "UPDATE ANOTACAO SET TITULO = ?, TEXTO = ?, DT_MODIFICACAO = CURRENT_TIMESTAMP WHERE ID = ?",
                         vals,
     
                         (_, {insertId}) => resolve(insertId),

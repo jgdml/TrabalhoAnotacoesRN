@@ -2,6 +2,9 @@ import { Alert } from "react-native";
 import Anotacao from "../model/anotacao";
 import AnotacaoService from "../service/anotacao_service";
 
+import Moment from "moment";
+import "moment/locale/pt-br";
+
 export default class AnotacoesController {
     constructor(navigation) {
         this.svc = new AnotacaoService();
@@ -13,6 +16,13 @@ export default class AnotacoesController {
 
     public async findAll() {
         return await this.svc.findAll();
+    }
+
+    public formatarData(timestamp: string) {
+        var data = Moment(timestamp);
+        data.subtract(3, "hours");
+
+        return data.format("LT - L").toString();
     }
 
     public async delete(id: number) {
@@ -38,12 +48,13 @@ export default class AnotacoesController {
     }
 
     public async goToCreateForm(refreshList, anotacao: Anotacao) {
-        if (anotacao != null){
-            await this.navigation.navigate("create", {refreshList: refreshList, anotacao: anotacao});
+        if (anotacao != null) {
+            await this.navigation.navigate("create", {
+                refreshList: refreshList,
+                anotacao: anotacao,
+            });
+        } else {
+            await this.navigation.navigate("create", { refreshList: refreshList });
         }
-        else{
-            await this.navigation.navigate("create", {refreshList: refreshList});
-        }
-        
     }
 }
