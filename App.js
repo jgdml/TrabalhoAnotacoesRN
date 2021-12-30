@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Anotacoes from "./lib/view/anotacoes";
 import InitDb from "./lib/db/sqlite/initDb";
 import CriarAnotacao from "./lib/view/criar_anotacao";
+import InitFirebase from "./lib/db/firestore/initialize";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ const customTheme = {
 
 function App() {
     new InitDb();
+    new InitFirebase()
 
     return (
         <NavigationContainer theme={customTheme}>
