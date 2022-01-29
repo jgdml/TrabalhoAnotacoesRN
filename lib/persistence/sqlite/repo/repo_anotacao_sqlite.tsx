@@ -1,8 +1,8 @@
-import Anotacao from "../../../model/anotacao";
+import Anotacao from "../../../entity/anotacao";
 import { DatabaseConnection } from "../connection";
 
 
-export default class DaoAnotacaoSqlite{
+export default class RepoAnotacaoSqlite{
 
     constructor(){
         this.db = DatabaseConnection.getConnection();

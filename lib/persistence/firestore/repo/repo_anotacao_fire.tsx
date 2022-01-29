@@ -1,8 +1,8 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
-import Anotacao from "../../../model/anotacao";
+import Anotacao from "../../../entity/anotacao";
 
-export default class DaoAnotacaoFire {
+export default class RepoAnotacaoFire {
     constructor() {
         this.collection = firebase.firestore().collection("anotacao");
     }

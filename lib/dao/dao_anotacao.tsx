@@ -1,16 +1,16 @@
-import DaoAnotacaoFire from "../db/firestore/dao/dao_anotacao_fire";
-import DaoAnotacaoSqlite from "../db/sqlite/dao/dao_anotacao_sqlite";
-import Anotacao from "../model/anotacao";
+import RepoAnotacaoFire from "../persistence/firestore/repo/repo_anotacao_fire";
+import RepoAnotacaoSqlite from "../persistence/sqlite/repo/repo_anotacao_sqlite";
+import Anotacao from "../entity/anotacao";
 
 export default class DaoAnotacao{
 
     constructor(){
-        this.sqlite = new DaoAnotacaoSqlite();
-        this.firebase = new DaoAnotacaoFire();
+        this.sqlite = new RepoAnotacaoSqlite();
+        this.firebase = new RepoAnotacaoFire();
     }
 
-    private sqlite : DaoAnotacaoSqlite;
-    private firebase : DaoAnotacaoFire;
+    private sqlite : RepoAnotacaoSqlite;
+    private firebase : RepoAnotacaoFire;
 
     async syncDatabase()  {
         var localRes = await this.sqlite.findAll();

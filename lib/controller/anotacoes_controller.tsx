@@ -1,5 +1,5 @@
 import { Alert } from "react-native";
-import Anotacao from "../model/anotacao";
+import Anotacao from "../entity/anotacao";
 import AnotacaoService from "../service/anotacao_service";
 
 import Moment from "moment";

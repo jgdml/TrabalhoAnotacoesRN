@@ -3,9 +3,9 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Anotacoes from "./lib/view/anotacoes";
-import InitDb from "./lib/db/sqlite/initDb";
+import InitDb from "./lib/persistence/sqlite/initDb";
 import CriarAnotacao from "./lib/view/criar_anotacao";
-import InitFirebase from "./lib/db/firestore/initialize";
+import InitFirebase from "./lib/persistence/firestore/initialize";
 
 const Stack = createNativeStackNavigator();
 
